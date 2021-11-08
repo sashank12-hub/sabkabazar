@@ -1,0 +1,30 @@
+.signup {
+  color: black !important;
+  display: flex;
+  margin-top: 50px;
+  transition: 1s all;
+}
+.col1 {
+  width: 40%;
+
+  text-align: center;
+  align-items: center;
+}
+
+.col1 p {
+  margin-top: 20px;
+}
+.col2 {
+  width: 60%;
+}
+.button {
+  background-color: brown;
+  border-radius: 5px;
+  text-align: center;
+  color: whitesmoke;
+
+  padding: 4px 15px;
+  width: 250px;
+  overflow-x: hidden;
+  margin-top: 20px;
+}

@@ -1,8 +1,12 @@
 import React from "react";
 import Image from "next/dist/client/image";
 import { useEffect, useState } from "react";
-
-function Header() {
+import Link from "next/link";
+import styled from "styled-components";
+import styles from "../styles/header.module.css";
+import { useRouter } from "next/router";
+function Header(props) {
+  const router = useRouter();
   const [image, setImage] = useState("/static/images/logo_2x.png");
   useEffect(() => {
     window.addEventListener("resize", resizeevent);
@@ -10,7 +14,7 @@ function Header() {
 
   const resizeevent = () => {
     if (window.innerWidth >= 500) {
-      setImage("/static/images/lowest-price.png");
+      setImage("/static/images/logo.png");
     } else {
       setImage("/static/images/logo_2x.png");
     }
@@ -18,11 +22,44 @@ function Header() {
   };
 
   return (
-    <div className="max-w-screen-2xl bg-black h-20 justify-items-center flex-row flex group">
-      <Image alt="logo" src={image} width={"100px"} height="80px" />
-      <h3 className=" mt-2 opacity-0 group-hover:opacity-100 animate-bounce">hello</h3>
-    </div>
+    <header className={styles.header}>
+      <div className={styles.col1}>
+        <Image src={image} alt="logo" width="100px" height="70px" />
+      </div>
+      <div className={styles.col2}>
+        <Link href={"/"}>
+          <a className={`${styles.link} `}>Home</a>
+        </Link>
+        <Link href={"/Products"}>
+          <a className={`${styles.link} `}>Products</a>
+        </Link>
+      </div>
+      <div className={styles.col3}>
+        <div>
+          <Link href={"/Signin"}>
+            <a className={`${styles.link} `}>SignIn</a>
+          </Link>
+          <Link href={"/Signup"}>
+            <a className={`${styles.link} `}>Register</a>
+          </Link>
+        </div>
+        <div className={styles.col3_2} onClick={()=>router.push("/Cart")}>
+          <>
+          <Image
+            src={"/static/images/cart.svg"}
+            alt="cart"
+            width={"20px"}
+            height={"20px"}
+            className={styles.image}
+          />
+          <p>0</p>
+          <p>Items</p>
+          </>
+        </div>
+      </div>
+    </header>
   );
 }
 
+const headerItem = styled.div``;
 export default Header;

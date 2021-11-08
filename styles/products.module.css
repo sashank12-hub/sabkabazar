@@ -1,0 +1,70 @@
+.products {
+  color: black;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.sidenav {
+  background-color: lightgray;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: left;
+  padding-top: 30px;
+  width: 20vw;
+}
+.navbarlink {
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.116);
+  cursor: pointer;
+}
+.productssection {
+  width: 80vw;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.Productitem {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+  margin-bottom: 10px;
+}
+.bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+.button {
+  background-color: brown;
+  border-radius: 5px;
+  text-align: center;
+  color: whitesmoke;
+  padding: 6px;
+  max-width: 250px;
+  overflow-x: hidden;
+  margin-bottom: 3px;
+}
+.description {
+  text-overflow: ellipsis;
+  margin: 2px;
+}
+.image {
+  margin: 2px;
+  padding: 10px;
+}
