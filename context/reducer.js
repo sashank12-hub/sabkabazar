@@ -1,37 +1,78 @@
 import * as types from "./types";
-export const cart = {
-items: [],// array of objects each object product,count
+export const initialState = {
+  opencart: false,
+  items: [],
+  user: {
+    name: "",
+    password: "",
+    email: "",
+    token: "",
+  },
+  total_count: 0,
+  total_price: 0,
+  // array of objects each object product,count
 };
 
-export const reducer = (state = cart, { type, payload }) => {
+export const reducer = (state, { type, payload }) => {
+  let index;
+  const updatedcart = Object.assign({}, state);
   switch (type) {
+    case types.OPEN:
+      updatedcart.opencart = !updatedcart.opencart;
+      return { ...updatedcart };
     case types.ADDTOCART:
+      index = updatedcart.items.findIndex((item) => item.id === payload.id);
+      if (index >= 0) {
+        const updatedItem = { ...updatedcart.items[index] };
+        updatedItem.count++;
+        updatedItem.stock--;
+        updatedcart.items[index] = updatedItem;
+        updatedcart.total_count++;
+        updatedcart.total_price += payload.price;
+        return {
+          ...updatedcart,
+        };
+      } else {
+        let obj = {
+          name: payload.name,
+          id: payload.id,
+          count: 1,
+          price: payload.price,
+          stock: payload.stock - 1,
+          imageURL: payload.imageURL,
+          description: payload.description,
+        };
 
-          let olditem=  state.items.filter(item=>item.id===payload.id)
-          if(olditem.length<=0){
-              let newitem={
-                  name:payload.name,
-                  id:payload.id,
-                  cost:payload.price,
-                  imageUrl:payload.imageURL,
-                  description:payload.description,
-                  stock:(payload.stock-1)
-              }
-              items=state.items.push(newitem)
-              return { ...state,items
-            
-              };
-          }
-          else{
-        const item= state.items.find(item=>item.id===payload.id)
-            
-              return{...state}
-          }
-      
+        updatedcart.total_count++;
+        updatedcart.total_price += payload.price;
+
+        return {
+          ...updatedcart,
+          items: [...updatedcart.items, obj],
+        };
+      }
+
     case types.REMOVEFROMCART:
-      return { ...state, ...payload };
+      index = state.items.findIndex((item) => item.id === payload.id);
+      if (index > -1) {
+        if (state.items[index].stock > 0) {
+          updatedcart.items[index].count--;
+          updatedcart.items[index].stock++;
+
+          return {
+            ...updatedcart,
+          };
+        }
+      } else {
+        alert("item not vaialable");
+        return state;
+      }
+
     case types.DELETEALLITEMS:
-      return { ...state, ...payload };
+      updatedcart.total_price = 0;
+      updatedcart.total_count = 0;
+      updatedcart.item = [];
+      return { ...updatedcart };
     default:
       return state;
   }

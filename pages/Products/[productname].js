@@ -31,7 +31,7 @@ export const getServerSideProps = async (context) => {
 
   const list_products = products.filter((item) => item.category === type[0].id);
 
-  console.log("list", list_products);
+ 
 
   return {
     props: {

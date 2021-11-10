@@ -11,7 +11,7 @@ function Banneritem({item}) {
             <strong> <h1>{item.name}</h1> </strong>
             <p>{item.description}</p>
             <Link href={`/Products/${item.name.split(" ").join("")}`} >
-            <a className={styles.button}>{`Explore ${item.name}`} </a>
+            <a className={`${styles.button} hover:bg-red-500 hover:scale-125 transition duration-500 ease-in-out focus:bg-black` }>{`Explore ${item.name}`} </a>
             </Link>
 
             

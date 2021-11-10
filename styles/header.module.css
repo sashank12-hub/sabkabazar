@@ -44,6 +44,7 @@
   height: 50%;
   align-items: flex-end;
   cursor: pointer;
+  padding-bottom: 5px;
 }
 .col3_2 p {
   margin-right: 2px;

@@ -1,3 +1,4 @@
 export const ADDTOCART = 'ADDTOCART'
 export const REMOVEFROMCART = 'REMOVEFROMCART'
 export const DELETEALLITEMS = 'DELETEALLITEMS'
+export const OPEN = 'OPEN'

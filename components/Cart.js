@@ -1,15 +1,13 @@
 import styles from "../styles/cart.module.css";
 import Image from "next/image";
 import Header from "../components/Header";
-import { CartProvider, cartcontext } from "../context/store";
+import { cartcontext } from "../context/store";
 import { useContext } from "react";
 import Cartitem from "../components/cartitem";
-import { useRouter } from "next/router";
 
 
 function Cart() {
-    const router=useRouter()
-  const { state, dispatch } = useContext(cartcontext);
+  const { state} = useContext(cartcontext);
   return (
     <div className={styles.cart}>
       <div className={styles.cartHeading}>
@@ -32,32 +30,17 @@ function Cart() {
         />
         <p>You wont find it cheaper anywhere</p>
       </div>
-      <div className={`${styles.footer2} cursor-pointer`} >
-          {state.total_count>0 ? <> <h3>Promo code can be applied on payment page</h3>
-        <div className={styles.checkout} onClick={()=>router.push("/checkout")}>
+      <div className={styles.footer2}>
+        <h3>Promo code can be applied on payment page</h3>
+        <div>
            <h3>Proceed to Checkout</h3>
            <h3>Rs.{state.total_price}</h3>
-        </div></>:<>
-        <div className=" bg-red-500 text-center text-white p-2 "onClick={()=>router.push("/")}>
-           <h3 className=" text-center cursor-pointer w-screen rounded-sm">Start Shopping</h3>
-           
         </div>
-        </>}
-       
       </div>
     </div>
   );
 }
 
-Cart.getLayout = (page) => {
-  return (
-    <>
-      <CartProvider>
-        <Header />
-        {page}
-      </CartProvider>
-    </>
-  );
-};
+
 
 export default Cart;

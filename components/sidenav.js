@@ -9,11 +9,11 @@ function Sidenav(props ){
         })
         .map((item) => {
           return (
-            <>
-              <Link href={`/Products/${item.name.split(" ").join("")}`} className={styles.navbarlink}key={item.id}>
-                <a className={styles.navbarlink}>{item.name}</a>
+            <div key={item.id}>
+              <Link href={`/Products/${item.name.split(" ").join("")}`} className={styles.navbarlink}>
+                <a className={`${styles.navbarlink} hover:scale-125 hover:text-center `}>{item.name}</a>
               </Link>
-            </>
+            </div>
           );
         })}
     </div>
