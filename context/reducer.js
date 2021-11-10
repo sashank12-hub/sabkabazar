@@ -16,9 +16,10 @@ export const initialState = {
 export const reducer = (state, { type, payload }) => {
   let index;
   const updatedcart = Object.assign({}, state);
+  console.log(updatedcart)
   switch (type) {
     case types.OPEN:
-      updatedcart.opencart = !updatedcart.opencart;
+      updatedcart.opencart = payload;
       return { ...updatedcart };
     case types.ADDTOCART:
       index = updatedcart.items.findIndex((item) => item.id === payload.id);

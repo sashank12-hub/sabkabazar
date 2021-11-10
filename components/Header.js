@@ -13,11 +13,13 @@ function Header(props) {
   const router = useRouter();
   const [image, setImage] = useState("/static/images/logo_2x.png");
   useEffect(() => {
-    window.addEventListener("resize", resizeevent);
+    setWidth(window.innerWidth)
+    //window.addEventListener("resize", resizeevent);
   }, []);
 
   const resizeevent = () => {
     setWidth(window.innerWidth);
+    console.log(width)
     if (window.innerWidth >= 500) {
       setImage("/static/images/logo.png");
     } else {
@@ -55,9 +57,11 @@ function Header(props) {
         <div
           className={`${styles.col3_2} hover:scale-125 `}
           onClick={() => {
-            if (width >= 768) {
+            console.log(width)
+            if (width > 720) {
               dispatch({
                 type: types.OPEN,
+                payload:true
               });
             } else {
               router.push("/Cart");

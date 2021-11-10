@@ -29,7 +29,7 @@ function Carousel() {
           <div className={styles.auto_btn3}></div>
           <div className={styles.auto_btn4}></div>
         </div>
-        <div className={styles.navigation_manual}>
+        <div className={`${styles.navigation_manual} z-10`}>
           <label htmlFor="radio1" className={styles.manual_btn}></label>
           <label htmlFor="radio2" className={styles.manual_btn}></label>
           <label htmlFor="radio3" className={styles.manual_btn}></label>
