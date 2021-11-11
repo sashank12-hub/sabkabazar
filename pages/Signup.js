@@ -1,113 +1,117 @@
 import styles from "../styles/authorization.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-function Signup() {
-    const router=useRouter()
-  const [Form, setForm] = useState({
+import Form from "../components/Form";
+import { cartcontext } from "../context/store";
+import InputField from "../components/InputField";
+import * as types from "../context/types"
+const Signup = () => {
+  const{state,dispatch}=useContext(cartcontext)
+  const router = useRouter();
+  const [register, setregister] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
     confirmpassword: "",
   });
-
+  const [errors, setErrors] = useState({});
   const handleChange = (e) => {
-    setForm({ ...Form, [e.target.name]: e.target.value });
+    setregister({ ...register, [e.target.name]: e.target.value });
   };
 
-  const handleformsubmit=(e)=>{
-      router.push("/")
+  const handleformsubmit = async (e) => {
+    e.preventDefault();
+    if (register.password == register.confirmpassword) {
+      
+      let response = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify({ user: register }),
+      });
+      let data = await response.json();
+      if (data.user.token) {
+        
+        dispatch({
+          type: types.USER,
+          payload: data.user,
+        });
+        
 
-  }
+        setregister({
+          firstname: "",
+          lastname: "",
+          email: "",
+          password: "",
+          confirmpassword: "",
+        });
+       
+        router.push("/Signin");
+      }
+    } else {
+      setregister({ ...register, password: "", confirmpassword: "" });
+      setErrors({
+        ...errors,
+        password: "password and confirm password should match",
+      });
+    }
+  };
   return (
-    <div className={styles.signup}>
-      <div className={styles.col1}>
+    <section className="register-wrapper mb-2">
+      <article className="register-container">
         <strong>
-          <h1>SignUp</h1>
+          <h3 className=" mb-2">SignUp</h3>
         </strong>
 
-        <p>we do not share your personal details with anyone</p>
+        <div>We do not share your personal details</div>
+      </article>
+      <div className="register-container">
+        <Form>
+          <InputField
+            label="First Name"
+            type="text"
+            name="firstname"
+            isrequired={true}
+            method={handleChange}
+          />
+          <InputField
+            label="Last Name"
+            type="text"
+            name="lastname"
+            isrequired={true}
+            method={handleChange}
+          />
+          <InputField
+            label="Email"
+            type="email"
+            name="email"
+            isrequired={true}
+            method={handleChange}
+          />
+          <InputField
+            label="Password"
+            type="password"
+            name="password"
+            isrequired={true}
+            method={handleChange}
+          />
+          <InputField
+            label="Confirm Password"
+            type="password"
+            name="confirmpassword"
+            isrequired={true}
+            method={handleChange}
+          />
+          <button
+            className={`${styles.button} hover:bg-red-500 hover:scale-125 focus:bg-black`}
+            onClick={handleformsubmit}
+          >
+            Sign Up
+          </button>
+        </Form>
+        {errors.password ? <p className="  p-2 text-red-400">{errors.password}</p> : ""}
       </div>
-      <div className={styles.col2}>
-        <form className={styles.form}>
-
-            
-          <div className={styles.inputwrapper}>
-            <label htmlFor="firstname" className={styles.label}>
-              firstname
-            </label>
-            <input
-              type={"text"}
-              value={Form.firstname}
-              onChange={handleChange}
-              name="firstname"
-              id="firstname"
-              className={styles.input}
-            />
-            <hr className={styles.hr}></hr>
-          </div>
-          <div className={styles.inputwrapper}>
-            <label htmlFor="lastname" className={styles.label}>
-              lastname
-            </label>
-            <input
-              type={"text"}
-              value={Form.lastname}
-              onChange={handleChange}
-              name="lastname"
-              id="lastname"
-              className={styles.input}
-            />
-            <hr className={styles.hr}></hr>
-          </div>
-          <div className={styles.inputwrapper}>
-            <label htmlFor="email" className={styles.label}>
-              Email
-            </label>
-            <input
-              type={"email"}
-              value={Form.email}
-              onChange={handleChange}
-              name="email"
-              id="email"
-              className={styles.input}
-            />
-            <hr className={styles.hr}></hr>
-          </div>
-          <div className={styles.inputwrapper}>
-            <label htmlFor="password" className={styles.label}>
-              password
-            </label>
-            <input
-              type={"password"}
-              value={Form.password}
-              onChange={handleChange}
-              name="password"
-              id="password"
-              className={styles.input}
-            />
-            <hr className={styles.hr}></hr>
-          </div>
-          <div className={styles.inputwrapper}>
-            <label htmlFor="confirmpassword" className={styles.label}>
-              confirm password
-            </label>
-            <input
-              type={"password"}
-              value={Form.confirmpassword}
-              onChange={handleChange}
-              name="confirmpassword"
-              id="confirmpassword"
-              onFocus={(e) => (e.target.placeholder = "")}
-              className={styles.input}
-            />
-            <hr className={styles.hr}></hr>
-          </div>
-        </form>
-        <button className={styles.button} onClick={handleformsubmit}>Sign Un</button>
-      </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default Signup;

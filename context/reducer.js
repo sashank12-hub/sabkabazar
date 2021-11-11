@@ -1,4 +1,6 @@
 import * as types from "./types";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 export const initialState = {
   opencart: false,
   items: [],
@@ -10,14 +12,51 @@ export const initialState = {
   },
   total_count: 0,
   total_price: 0,
+  userverified: false,
   // array of objects each object product,count
 };
 
 export const reducer = (state, { type, payload }) => {
   let index;
   const updatedcart = Object.assign({}, state);
-  console.log(updatedcart)
   switch (type) {
+    case types.LOGOUT:
+      return {
+        ...updatedcart,
+        opencart: false,
+        items: [],
+        user: {
+          name: "",
+          password: "",
+          email: "",
+          token: "",
+        },
+        total_count: 0,
+        total_price: 0,
+        userverified: false,
+      };
+    case types.LOGIN:
+      if (
+        updatedcart.user.password === payload.password &&
+        updatedcart.user.email === payload.email
+      ) {
+        console.log("came here");
+        return { ...updatedcart, userverified: true };
+      }
+    // bcrypt.compare(payload.password,)
+    // bcrypt.hash(payload.password, 10, (err, hash) => {
+    //   if (hash) {
+    //     if (
+    //       updatedcart.user.password === password &&
+    //       updatedcart.user.email === payload.email
+    //     ) {
+    //       console.log("came here")
+    //       return { ...updatedcart, userverified: true };
+    //     }
+    //   }
+    // });
+    case types.USER:
+      return { ...updatedcart, user: payload };
     case types.OPEN:
       updatedcart.opencart = payload;
       return { ...updatedcart };

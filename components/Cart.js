@@ -11,9 +11,9 @@ function Cart() {
   const router = useRouter();
   const { state, dispatch } = useContext(cartcontext);
   return (
-    <div className={state.opencart ? "block   " : "hidden"}>
+    <div className={state.opencart ? `block ` : "hidden"}>
       <div className=" z-100 fixed top-0  bg-black w-screen h-screen opacity-60"></div>
-      <div className="  w-96 fixed     top-8 z-30  bg-gray-100  rounded-lg right-20 ">
+      <div className="  w-96 fixed     top-8 z-30  bg-gray-100  rounded-lg right-20 min-h-32  ">
         <div className="bg-black text-white opacity-200 pt-3 text-md font-light text-center  flex-row flex justify-between">
           <strong>
             <h1 className="pl-3">My Cart ({state.total_count} Items) </h1>
@@ -32,7 +32,7 @@ function Cart() {
         </div>
         {state.total_count > 0 && (
           <>
-            <div className={`overflow-y-scroll mt-1  h-80`}>
+            <div className={`overflow-y-scroll mt-1 scroll  h-auto max-h-72`}>
               {state.items.map((item, index) => (
                 <Cartitem product={item} key={index} />
               ))}
@@ -59,11 +59,36 @@ function Cart() {
         <div className={`${styles.footer2} cursor-pointer`}>
           {state.total_count > 0 ? (
             <>
-              
               <h3>Promo code can be applied on payment page</h3>
               <div
-                className={`${styles.checkout} w-full`}
-                onClick={() => router.push("/checkout")}
+                className={`${styles.checkout} w-full mt hover:bg-red-500 hover:scale-110 focus:bg-black`}
+                onClick={async () =>{
+                  
+                    const res= await fetch("/api/checkout", {
+                      method:"POST",
+                      body:JSON.stringify({cart:state})
+                      
+                    })
+                    const data=await res.json()
+                    if(res.status==200){
+                      alert("successful")
+                      dispatch({
+                        type:types.DELETEALLITEMS
+                      })
+                      setTimeout(() => {
+                        dispatch({
+                          type:types.OPEN,
+                          payload:false
+                        })
+                      }, 2000);
+                      
+                      
+                    }
+                   
+                  }
+                    
+                 
+                }
               >
                 <h3>Proceed to Checkout</h3>
                 <h3>Rs.{state.total_price}</h3>
@@ -72,15 +97,15 @@ function Cart() {
           ) : (
             <>
               <div
-                className=" bg-red-500 text-center text-white p-2   w-full"
+                className="  bg-red-700 text-center text-white p-2   w-full  hover:bg-red-500 hover:scale-110 focus:bg-black"
                 onClick={() => {
-                  dispatch({
-                    type: types.OPEN,
-                    payload: false,
-                  })
-                  router.push("/")
-                  
-                  
+                  setTimeout(() => {
+                    dispatch({
+                      type: types.OPEN,
+                      payload: false,
+                    });
+                    router.push("/");
+                  }, 200);
                 }}
               >
                 <h3 className=" text-center cursor-pointer  rounded-sm">

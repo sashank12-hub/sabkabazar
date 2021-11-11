@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect,useContext} from "react";
 import Image from "next/dist/client/image";
-import { useEffect, useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import styles from "../styles/header.module.css";
@@ -9,24 +8,13 @@ import { cartcontext } from "../context/store";
 import * as types from "../context/types";
 function Header(props) {
   const { state, dispatch } = useContext(cartcontext);
+  useEffect(() => {
+   console.log("state",state)
+  }, [state.userverified,state])
+  
   const [width, setWidth] = useState(0);
   const router = useRouter();
   const [image, setImage] = useState("/static/images/logo_2x.png");
-  useEffect(() => {
-    setWidth(window.innerWidth)
-    //window.addEventListener("resize", resizeevent);
-  }, []);
-
-  const resizeevent = () => {
-    setWidth(window.innerWidth);
-    console.log(width)
-    if (window.innerWidth >= 500) {
-      setImage("/static/images/logo.png");
-    } else {
-      setImage("/static/images/logo_2x.png");
-    }
-    console.log(window.innerWidth);
-  };
 
   return (
     <header className={styles.header}>
@@ -47,25 +35,40 @@ function Header(props) {
       </div>
       <div className={styles.col3}>
         <div>
+          { !state.userverified && 
+          <>
           <Link href={"/Signin"}>
+            
             <a className={`${styles.link} hover:scale-125  z-10 `}>SignIn</a>
           </Link>
+
+          </>
+
+          }
+         {
+           
+         }
+         
           <Link href={"/Signup"}>
-            <a className={`${styles.link} hover:scale-125 `}>Register</a>
+            {state.userverified ? (
+              <a className={`${styles.link} hover:scale-125 `} onClick={(e)=>{
+                e.preventDefault();
+                dispatch({
+                  type:types.LOGOUT
+                })
+              }}>LogOut</a>
+            ) : (
+              <a className={`${styles.link} hover:scale-125 `}>Register</a>
+            )}
           </Link>
         </div>
         <div
           className={`${styles.col3_2} hover:scale-125 `}
           onClick={() => {
-            console.log(width)
-            if (width > 720) {
-              dispatch({
-                type: types.OPEN,
-                payload:true
-              });
-            } else {
-              router.push("/Cart");
-            }
+            dispatch({
+              type: types.OPEN,
+              payload: true,
+            });
           }}
         >
           <>

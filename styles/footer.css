@@ -1,7 +1,8 @@
 .footer {
   background-color: lightgray;
 
-  height: 20px;
+  height: 30px;
   text-align: center;
   align-items: flex-end;
+  margin-top: 10px;
 }
