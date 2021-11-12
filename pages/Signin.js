@@ -35,6 +35,7 @@ const SignIn = () => {
         router.push("/");
       } else {
         setTimeout(() => {
+          alert("signup first")
           window.location.href = "/Signup";
         }, 1000);
       }
@@ -46,6 +47,10 @@ const SignIn = () => {
       });
     }
   };
+
+  if(!state.user){
+
+  }
 
   return (
     <section className="register-wrapper mb-2">

@@ -5,8 +5,8 @@ import styles from "../../styles/products.module.css";
 import Productssection from "../../components/Productssection";
 function Products(props) {
   return (
-    <div className={styles.products}>
-      <div className={styles.sidenav}>
+    <div className={`${styles.products}`}>
+      <div className={`${styles.sidenav} `}>
       <Sidenav array={props.Categoriesdata} />
       </div>
       <div className={styles.productssection}>

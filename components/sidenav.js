@@ -3,7 +3,7 @@ import styles from "../styles/products.module.css";
 function Sidenav(props ){
     
   return (
-    <div >
+    <div>
       {props.array.sort((a, b) => {
           return a.order - b.order;
         })
