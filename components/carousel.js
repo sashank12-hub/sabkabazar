@@ -21,7 +21,7 @@ function Carousel() {
 
         <img src="/static/images/offers/offer5.jpg" className=" " alt="image" />
       </div>
-
+    
       <div className={styles.radio}>
         <button
           className={`${styles.label} focus:bg-blue-400`}
