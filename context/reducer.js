@@ -43,18 +43,7 @@ export const reducer = (state, { type, payload }) => {
         console.log("came here");
         return { ...updatedcart, userverified: true };
       }
-    // bcrypt.compare(payload.password,)
-    // bcrypt.hash(payload.password, 10, (err, hash) => {
-    //   if (hash) {
-    //     if (
-    //       updatedcart.user.password === password &&
-    //       updatedcart.user.email === payload.email
-    //     ) {
-    //       console.log("came here")
-    //       return { ...updatedcart, userverified: true };
-    //     }
-    //   }
-    // });
+    
     case types.USER:
       return { ...updatedcart, user: payload };
     case types.OPEN:
@@ -98,6 +87,8 @@ export const reducer = (state, { type, payload }) => {
         if (state.items[index].stock > 0) {
           updatedcart.items[index].count--;
           updatedcart.items[index].stock++;
+          updatedcart.total_count--;
+        updatedcart.total_price -= payload.price;
 
           return {
             ...updatedcart,
@@ -113,6 +104,23 @@ export const reducer = (state, { type, payload }) => {
       updatedcart.total_count = 0;
       updatedcart.item = [];
       return { ...updatedcart };
+
+      // case types.DELETEINDIVIDUAL:
+      //   index = updatedcart.items.findIndex((item) => item.id === payload.id);
+      //   if (index >= 0) {
+      //     const updatedItem = { ...updatedcart.items[index] };
+      //     // updatedItem.count =0;
+      //     // updatedItem.stock--;
+      //     // updatedcart.items[index] = updatedItem;
+      //     // updatedcart.total_count++;
+      //     updatedcart.total_price -=(updatedItem.count*payload.price)
+      //     updatedcart.total_count-=updatedItem.count
+
+      //     return {
+      //       ...updatedcart,
+      //     };
+      //   }
+
     default:
       return state;
   }

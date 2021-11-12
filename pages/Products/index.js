@@ -7,20 +7,17 @@ function Products(props) {
   return (
     <div className={`${styles.products}`}>
       <div className={`${styles.sidenav} `}>
-      <Sidenav array={props.Categoriesdata} />
+        <Sidenav array={props.Categoriesdata} />
       </div>
       <div className={styles.productssection}>
-      <Productssection products={props.products} />
+        <Productssection products={props.products} />
       </div>
-     
     </div>
   );
 }
 
 export default Products;
 export const getStaticProps = async (ctx) => {
-  // const { data } = // your fetch function here
-
   return {
     props: {
       Categoriesdata: array.filter((items) => items.enabled === true),

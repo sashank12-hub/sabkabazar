@@ -8,6 +8,13 @@ function Cartitem(props) {
   
     const {state,dispatch}=useContext(cartcontext)
     let index=state.items.findIndex(item=>item.id===props.product.id)
+    if(state.items[index].count<=0){
+      return(
+        <div>
+          
+        </div>
+      )
+    }
 
   return (
     <div className="flex flex-row justify-around text-black  mb-2 bg-white hover:scale-105">
@@ -49,12 +56,12 @@ function Cartitem(props) {
                 Rs.
                 {parseInt(state.items[index].price) * parseInt(state.items[index].count)}
               </h4>
-              <button className="_cartbutton hover:bg-red-500 hover:scale-125 focus:bg-black"onClick={()=>setTimeout(()=>{dispatch({
+              {/* <button className="_cartbutton hover:bg-red-500 hover:scale-125 focus:bg-black"onClick={()=>setTimeout(()=>{dispatch({
                   type:types.ADDTOCART,
                   payload:props.product
               })},700)
                   
-              }>+</button>
+              }>×</button> */}
             </div>
           </div>
          
