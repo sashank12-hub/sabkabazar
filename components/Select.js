@@ -13,6 +13,8 @@ function Select(props) {
             router.push(`${e.target.value.split(" ").join("")}`);
           }}
         >
+            <option key={"123"}
+                  value={`/Products`}>select a value</option>
           {props.array
             .sort((a, b) => {
               return a.order - b.order;
