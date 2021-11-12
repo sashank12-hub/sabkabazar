@@ -3,16 +3,25 @@ import Sidenav from "../../components/sidenav";
 import products from "../../server/products/index.get.json";
 import styles from "../../styles/products.module.css";
 import Productssection from "../../components/Productssection";
+import Select from "../../components/Select";
 function Products(props) {
   return (
+    <>
+    <div className="  z-20">
+    <Select array={props.Categoriesdata}/>
+
+   </div>
     <div className={`${styles.products}`}>
+     
       <div className={`${styles.sidenav} `}>
         <Sidenav array={props.Categoriesdata} />
-      </div>
+
+       </div>
       <div className={styles.productssection}>
         <Productssection products={props.products} />
       </div>
     </div>
+    </>
   );
 }
 

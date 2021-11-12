@@ -43,6 +43,9 @@ export const reducer = (state, { type, payload }) => {
         console.log("came here");
         return { ...updatedcart, userverified: true };
       }
+      else{
+        return { ...updatedcart}
+      }
     
     case types.USER:
       return { ...updatedcart, user: payload };

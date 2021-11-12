@@ -5,11 +5,17 @@ import { useEffect, useState } from "react";
 import Sidenav from "../../components/sidenav";
 import styles from "../../styles/products.module.css";
 import Productssection from "../../components/Productssection";
+import Select from "../../components/Select";
 function Product(props) {
   
   const [Products, setProducts] = useState([]);
   const router = useRouter();
   return (
+    <>
+    <div className={`${styles.selecttag}z-20`}  >
+    <Select array={props.categories}/>
+
+   </div>
     <div className={styles.products}>
       <div className={styles.sidenav}>
       <Sidenav array={props.categories} />
@@ -17,7 +23,9 @@ function Product(props) {
       <div className={styles.productssection}>
       <Productssection products={props.products} />
       </div>
+   
     </div>
+    </>
   );
 }
 

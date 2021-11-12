@@ -1,0 +1,48 @@
+.select {
+  /* // A reset of styles, including removing the default dropdown arrow */
+  appearance: none !important;
+  /* // Additional resets for further consistency */
+
+  border: none;
+  padding: 0 1em 0 0;
+  padding-left: 40px;
+  margin: 0;
+  width: 100vw;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+  justify-content: center;
+
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position: relative;
+}
+select,
+.select:after {
+  grid-area: select;
+}
+
+select {
+  outline: none;
+  width: 90vw;
+  background-color: brown;
+}
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}
+.overall {
+  display: none;
+}
+@media screen and (max-width: 780px) {
+  .overall {
+    display: block;
+  }
+}

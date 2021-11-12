@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/select.css";
 import "../styles/footer.css";
 import"../styles/cart.css"
 import "../styles/form.css";
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <CartProvider>
         <Header />
+        
         <Component {...pageProps} />
         <Footer />
         <Cart/>

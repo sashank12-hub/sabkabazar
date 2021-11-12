@@ -68,3 +68,34 @@
   margin: 2px;
   padding: 10px;
 }
+
+@media screen and (max-width: 640px) {
+  .sidenav {
+    width: 0px;
+    display: none;
+  }
+  .productssection {
+    width: 100vw;
+  }
+  .Productitem {
+    width: 30vw !important;
+  }
+}
+@media screen and (max-width: 780px) {
+  .productssection {
+    width: 80vw;
+  }
+  .Productitem {
+    width: 30vw;
+  }
+  .sidenav {
+    width: 0px;
+    display: none;
+  }
+  .selecttag {
+    display: block;
+  }
+}
+.selecttag {
+  display: none;
+}
