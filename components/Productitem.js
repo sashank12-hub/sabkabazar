@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { cartcontext } from "../context/store";
 import * as types from "../context/types";
+import router from "next/router";
 function Productitem(props) {
   const { state, dispatch } = useContext(cartcontext);
   return (
@@ -24,13 +25,17 @@ function Productitem(props) {
         <p>MRP Rs.{props.product.price}</p>
         <button
           className={`${styles.button} hover:bg-red-500 hover:scale-125 transition duration-500 ease-in-out focus:bg-black `}
-          onClick={() =>
+          onClick={() =>{
+            if(!state.user.token){
+              alert("sign up first");
+              router.push("/Signup")
+            }
             setTimeout(() => {
               dispatch({
                 type: types.ADDTOCART,
                 payload: props.product,
               });
-            }, 700)
+            }, 700)}
           }
         >
           Add To Cart
