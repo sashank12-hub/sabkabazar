@@ -13,7 +13,7 @@ function Cart() {
   return (
     <div className={state.opencart ? `block ` : "hidden"}>
       <div className=" z-100 fixed top-0  bg-black w-screen h-screen opacity-60"></div>
-      <div className="  w-96 fixed     top-8 z-30  bg-gray-100  rounded-lg right-20 min-h-32  ">
+      <div className="  w-96 fixed     top-14 z-30  bg-gray-100  rounded-lg right-20 min-h-32  ">
         <div className="bg-black text-white opacity-200 pt-3 text-md font-light text-center  flex-row flex justify-between">
           <strong>
             <h1 className="pl-3">My Cart ({state.total_count} Items) </h1>

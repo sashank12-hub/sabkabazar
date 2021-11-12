@@ -12,15 +12,9 @@
   user-select: none;
   max-width: 100vw;
 }
-.body ::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
-.scroll::-webkit-scrollbar {
-  display: none;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+*:input[type="radio"]:checked + label {
+  background-color: #ffff00;
 }

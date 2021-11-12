@@ -1,86 +1,65 @@
 .slider {
-  max-width: 100vw !important;
-  height: 300px;
-  border-radius: 10px;
-  margin: 10px;
-
-  overflow: scroll;
-}
-
-.slides {
-  width: 200vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
-  height: 350px;
+  flex-direction: row;
+
+  height: max-content;
+
+  overflow: auto;
+  width: 100vw;
+  justify-content: space-between;
+  position: relative;
 }
-.slide img {
-  height: 300px;
-  max-width: 100vw !important;
+.label {
+  cursor: pointer;
+  margin: 8px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgb(13, 128, 204);
+
+  border-radius: 50%;
 }
 
-.slides input {
+.slider img {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.radio {
+  display: flex;
+  flex-direction: row;
+  z-index: 104;
+  position: absolute;
+  left: 40%;
+  top: 54%;
+}
+.radio input {
   display: none;
 }
 
-.slide {
-  width: 90%;
-  transition: 2s;
-  position: relative;
-}
-.navigation_manual {
-  position: absolute;
-  display: flex;
-  margin-top: -40px;
-  justify-content: center;
-  width: 70vw;
-  top: 67%;
-  left: 12%;
-}
-.manual_btn {
-  border: 2px solid #40d3dc;
-  padding: 5px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 1s;
-}
-.manual_btn:not(:last-child) {
-  margin-right: 30px;
-}
-.manual_btn:hover {
-  background-color: #40d3dc;
-}
+​
+/* .radio input :focus input ~ .label {
+  background-color: blue;
+} */
 
-.radio1 {
-  background-color: orange;
-}
-
-.radio2:checked .first {
-  /* margin-right: -20% !important; */
-  transform: translateX(30%);
-}
-.radio3:checked ~ .first {
-  margin-left: -40%;
-}
-.radio4:checked ~ .first {
-  margin-left: -60%;
-}
-.radio5:checked ~ .first {
-  margin-left: -80%;
-}
 .banner {
   display: flex;
   flex-direction: column;
   max-width: 100vw !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .Banneritem {
   display: flex;
   /* background-color: yellow; */
-  margin-bottom: 3px;
-  margin-top: 1.5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   color: black;
   align-items: center;
   overflow-y: hidden;
   height: 20vw;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: white;
 }
 .col1 {
   width: 50%;

@@ -6,15 +6,19 @@ import Banner from "../components/banner";
 import array from "../server/categories/index.get.json";
 export default function Home(props) {
   return (
-    <div>
+    <div className="  bg-gray-200 ">
       <Head>
         <title>Sabka Bazar</title>
         <meta name="description" content="Ecommerce website" />
         <link rel="icon" href="/static/images/logo.png" />
       </Head>
-
+     
       <Carousel />
+    
+      <div className=" -mt-2">
       <Banner array={props.Categoriesdata} />
+      </div>
+      
     </div>
   );
 }
